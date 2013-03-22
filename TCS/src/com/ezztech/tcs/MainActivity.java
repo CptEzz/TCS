@@ -2,6 +2,7 @@ package com.ezztech.tcs;
 
 import net.simonvt.menudrawer.MenuDrawer;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,6 +20,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void timeTableClick(View v){
+		Intent intent = new Intent(this, TimeTable.class);
+		startActivity(intent);
 		mDrawer.closeMenu();
 	}
 }
