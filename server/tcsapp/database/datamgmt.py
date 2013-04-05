@@ -2,14 +2,11 @@ import sqlite3
 import os
 from .. import security
 
-
-
-
 database = 'data.sqlite'
-connection = sqlite3.connect(database)
+sqlite3.connect(database)
 
 def getConnection():
-    return connection
+    return sqlite3.connect(database)
 
 def init():
     cur = getConnection().cursor()
