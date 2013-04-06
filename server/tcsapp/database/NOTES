@@ -1,0 +1,6 @@
+Primary key of Student and Class tables is ROWID, an unspecified colummn, an auto-incrementing
+integer.
+
+Based on tests, it has been gathered that if a mid-range entry (that it an entry with a ROWID
+that is not the largest) is deleted, it will not be used again. However, if the latest entry
+(the entry with the largest ROWID) is deleted, it will be used again.
