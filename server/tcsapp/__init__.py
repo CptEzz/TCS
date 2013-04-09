@@ -24,3 +24,22 @@ class Root(object):
     @cherrypy.expose
     def echotest(self,stuff="NULL"):
         return stuff
+        
+    @cherrypy.expose
+    def jsonechotest(self,stuff=None):
+        data = dict()
+        if not(stuff):
+            data['errorc'] = 400
+            data['errorm'] = "Missing parameter (jsondata)"
+            return json.dumps(data)
+        else:
+            data['echo'] = stuff
+            try:
+                decoded = json.loads(stuff)
+            except ValueError as e:
+                data['errorc'] = 400
+                data['errorm'] = e.message
+                return json.dumps(data)
+            for key in decoded:
+                data[key] = decoded[key]
+        return json.dumps(data)
