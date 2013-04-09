@@ -64,7 +64,7 @@ def dummyAuthenticate(studentID, password):
     Should be replaced with a suitable function that performs
     the same taskes but with a real database and dataset.
     """
-    if(authwords[studentID][0] == security.passwd(password,authwords[studentID][1]): #It's an old password sir, but it checks out
+    if(authwords[studentID][0] == security.passwd(password,authwords[studentID][1])): #It's an old password sir, but it checks out
         if authkeys.has_key(studentID):
             del authkeys[studentID]
         authkeys[studentID] = security.stdhash(os.urandom(2048))
