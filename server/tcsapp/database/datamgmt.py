@@ -76,6 +76,6 @@ def dummyAuthenticate(studentID, password):
 
 def dummyAuthcheck(studentID, authcode):
     if not(authkeys.has_key(studentID)):
-        return false
+        return False
     return (authkeys[studentID] == authcode)
         

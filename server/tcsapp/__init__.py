@@ -58,4 +58,19 @@ class Root(object):
             data['errorm'] = "Invalid user/password combination"
         data['authcode'] = authcode
         return json.dumps(data)
-            
+    
+    @cherrypy.expose
+    def dummyauthcheck(self,user=None,authcode=None):
+        data = dict()
+        if not(user) or not(authcode):
+            data['errorc'] = 400
+            data['errorm'] = "Missing parameter (user/authcode)"
+            return json.dumps(data)
+        
+        authd = database.dummyAuthcheck(user,authcode)
+        if not(authd):
+            data['errorc'] = 403
+            data['errorm'] = "Invalid session (decrease your fail and try again)"
+        data['auth'] = authd
+        return json.dumps(data)
+
