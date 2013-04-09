@@ -70,4 +70,4 @@ def dummyAuthenticate(studentID, password):
         authkeys[studentID] = security.stdhash(os.urandom(2048))
         return authkeys[studentID]
     else:
-        return 0
+        return None
