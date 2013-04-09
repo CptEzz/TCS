@@ -1,1 +1,32 @@
-Server sub-set
+HTTPS RETURNS
+
+All returns are JSONify'd dictionaries. Keys present in the dictionary will vary according to the method called. If errorc and/or errorm are present, this indicates an error of some sort in the call (see HTTPS ERROR RETURNS for more info).
+
+Returns may not be consistent and some keys may be missing, particularly when an error has occurred. Always check for the presence keys before use.
+
+HTTPS ERROR RETURNS
+
+If errorc and/or errorm are present, this indicates an error of some-sort in the method call. This may be a lack of authorisation, invalid parameters or a recovered serverside processing error. The value of errorc will be a integer. The the HTTP error code matching the value of errorc will roughly describe the type of error. The value of errorm will be a string. This will be a message describing the error in detail.
+
+HTTPS METHODS
+
+The URLs for the HTTPS methods taking parameters simply take them as sub-directories of the method. For example, to pass "data" to the method "example", do a HTTPS get to "/example/data". All parameters should be URL-encoded plaintext strings unless otherwise specified.
+
+/dummyauth/paramuser/parampassword
+
+/dummyauth authenticates the user
+paramuser - the username to authenticate
+parampassword - the password to authenticate with
+
+returns: authcode
+authcode - String/SHA512 hash. If present, the call successfully completed. If true, the user successfully authenticated. The value of this authcode should be saved as it will identify the user as authentic for all subsequent calls.
+
+
+/dummyauthcheck/paramuser/paramauthcode
+
+/dummyauthcheck is an empty call that does the same identity check as any other call, but performs no operation
+paramuser - the username to identify as
+paramauthcode - saved code from a auth call to verify that the user is legitimate
+
+returns: auth
+auth - Boolean. If present, the call successfully completed. If true, the user has successfully authenticated.
