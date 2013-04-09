@@ -20,3 +20,7 @@ class Root(object):
         data = {'message':'Hello JSON world',
                 'batman':'http://i.imgur.com/G11Bocg.gif'}
         return json.dumps(data)
+    
+    @cherrypy.expose
+    def echotest(self,stuff="NULL"):
+        return stuff
