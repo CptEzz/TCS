@@ -43,3 +43,19 @@ class Root(object):
             for key in decoded:
                 data[key] = decoded[key]
         return json.dumps(data)
+    
+    @cherrypy.expose
+    def dummyauth(self,user=None,password=None):
+        data = dict()
+        if not(user) or not(password):
+            data['errorc'] = 400
+            data['errorm'] = "Missing parameter (user/password)"
+            return json.dumps(data)
+            
+        authcode = database.dummyAuthenticate(user,password)
+        if not(authcode):
+            data['errorc'] = 401
+            data['errorm'] = "Invalid user/password combination"
+        data['authcode'] = authcode
+        return json.dumps(data)
+            
