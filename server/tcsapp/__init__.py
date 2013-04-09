@@ -56,6 +56,9 @@ class Root(object):
         if not(authcode):
             data['errorc'] = 401
             data['errorm'] = "Invalid user/password combination"
+            if user=="coffee":
+                data['errorc'] = 418
+                data['errorm'] = "I'm a teapot"
         data['authcode'] = authcode
         return json.dumps(data)
     
