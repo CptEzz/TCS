@@ -1,10 +1,11 @@
 package com.ezztech.tcs;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.security.KeyStore;
 
 import org.apache.http.HttpResponse;
@@ -23,15 +24,24 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class HttpRequest extends AsyncTask<URL, Integer, Long> {
-
+public class HttpRequest extends AsyncTask<Integer, Integer, JSONObject> {
+	private JSONObject json;
+	
+	protected void onPostExecute(JSONObject json){
+		Log.v("TEST", "REQUEST FINISHED!");
+	}
+	
 	@Override
-	protected Long doInBackground(URL... arg0) {
+	protected JSONObject doInBackground(Integer... datain) {
 		HttpResponse response = null;
 		InputStream in = null;
+		
 		try{
 			HttpClient client = this.getNewHttpClient();
 			HttpGet request = new HttpGet();
@@ -39,19 +49,29 @@ public class HttpRequest extends AsyncTask<URL, Integer, Long> {
 			response = client.execute(request);
 			in = response.getEntity().getContent();
 			
+			BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8")); 
+		    StringBuilder responseStrBuilder = new StringBuilder();
+
+		    String inputStr;
+		    while ((inputStr = streamReader.readLine()) != null){
+		        responseStrBuilder.append(inputStr);
+		    }
+		    json = new JSONObject(responseStrBuilder.toString());
+		    
+			in.close();
+			
+			
 		} catch (URISyntaxException e){
 			e.printStackTrace();
 		} catch (ClientProtocolException e){
 			e.printStackTrace();
 		} catch (IOException e){
 			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (response != null){
-			
-		}else{
-			
-		}
-		return null;
+		return json;
 	}
 	
 	public HttpClient getNewHttpClient() {
@@ -77,5 +97,4 @@ public class HttpRequest extends AsyncTask<URL, Integer, Long> {
 	        return new DefaultHttpClient();
 	    }
 	}
-
 }
