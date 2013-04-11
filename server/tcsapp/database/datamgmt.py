@@ -54,7 +54,7 @@ or Enrollments"""
 authkeys = dict()
 authwords = dict()
 
-
+#authwords[studentKey] = (hashedPassword, salt)
 authwords['stu1'] = (security.passwd('password1','salt1'),'salt1')
 authwords['stu2'] = (security.passwd('password2','salt2'),'salt2')
 
@@ -64,16 +64,20 @@ def dummyAuthenticate(studentID, password):
     Should be replaced with a suitable function that performs
     the same taskes but with a real database and dataset.
     """
+    #If the database does not contain said student, return none.
     if not(authwords.has_key(studentID)):
         return None
+    #If the password password is correct and the user is already authenticated then deletes and reissues authentication code
+    #which the user uses to identify themselves for all subsequent authCheck calls
     if(authwords[studentID][0] == security.passwd(password,authwords[studentID][1])): #It's an old password sir, but it checks out
+        
         if authkeys.has_key(studentID):
             del authkeys[studentID]
         authkeys[studentID] = security.stdhash(os.urandom(2048))
         return authkeys[studentID]
     else:
         return None
-
+#Returns the status of the students authentication, given the authentication code
 def dummyAuthcheck(studentID, authcode):
     if not(authkeys.has_key(studentID)):
         return False
