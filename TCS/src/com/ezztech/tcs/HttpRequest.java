@@ -28,24 +28,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-public class HttpRequest extends AsyncTask<Integer, Integer, JSONObject> {
+public class HttpRequest extends AsyncTask<String, Integer, JSONObject> {
 	private JSONObject json;
+	private MainActivity activity;
 	
 	protected void onPostExecute(JSONObject json){
-		Log.v("TEST", "REQUEST FINISHED!");
+		//Log.v("TEST", "REQUEST FINISHED!");
+		activity.updateResults(json);
+	}
+	
+	public HttpRequest(MainActivity a){
+		this.activity = a;
 	}
 	
 	@Override
-	protected JSONObject doInBackground(Integer... datain) {
+	protected JSONObject doInBackground(String... datain) {
 		HttpResponse response = null;
 		InputStream in = null;
+		
+		String thing = datain[0];
 		
 		try{
 			HttpClient client = this.getNewHttpClient();
 			HttpGet request = new HttpGet();
-			request.setURI(new URI("https://bennynet.dyndns.org:8080/jsontest"));
+			request.setURI(new URI(datain[0]));
 			response = client.execute(request);
 			in = response.getEntity().getContent();
 			
