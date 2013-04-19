@@ -90,7 +90,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class color {
         /**  The default background of the menu. 
          */
-        public static final int md__defaultBackground=0x7f040000;
+        public static final int md__defaultBackground=0x7f050000;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
@@ -98,23 +98,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         /**  Used with View#setTag(int) to specify a position for the active view. 
          */
-        public static final int mdActiveViewPosition=0x7f050005;
+        public static final int mdActiveViewPosition=0x7f060005;
         /**  ID used when defining the content layout in XML. 
          */
-        public static final int mdContent=0x7f050000;
+        public static final int mdContent=0x7f060000;
         /**  ID used when defining the menu layout in XML. 
          */
-        public static final int mdMenu=0x7f050001;
+        public static final int mdMenu=0x7f060001;
         /**  The ID of the content container. 
          */
-        public static final int md__content=0x7f050002;
+        public static final int md__content=0x7f060002;
         /**  The ID of the drawer. 
          */
-        public static final int md__drawer=0x7f050004;
+        public static final int md__drawer=0x7f060004;
         /**  The ID of the menu container. 
          */
-        public static final int md__menu=0x7f050003;
-        public static final int menu_settings=0x7f050006;
+        public static final int md__menu=0x7f060003;
+        public static final int menu_settings=0x7f060006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -122,14 +122,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_time_table=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_main=0x7f080000;
-        public static final int activity_time_table=0x7f080001;
+        public static final int activity_main=0x7f090000;
+        public static final int activity_time_table=0x7f090001;
+    }
+    public static final class raw {
+        public static final int tcskeystore=0x7f040000;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int hello_world=0x7f060001;
-        public static final int menu_settings=0x7f060002;
-        public static final int title_activity_time_table=0x7f060003;
+        public static final int app_name=0x7f070000;
+        public static final int hello_world=0x7f070001;
+        public static final int menu_settings=0x7f070002;
+        public static final int title_activity_time_table=0x7f070003;
     }
     public static final class style {
         /** 
@@ -144,11 +147,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070002;
-        public static final int Widget=0x7f070000;
+        public static final int AppBaseTheme=0x7f080002;
+        public static final int Widget=0x7f080000;
         /**  Base theme for the menu drawer. 
          */
-        public static final int Widget_MenuDrawer=0x7f070001;
+        public static final int Widget_MenuDrawer=0x7f080001;
     }
     public static final class styleable {
         /**  Styleables used for styling the menu drawer. 

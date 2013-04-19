@@ -24,7 +24,7 @@ public class MainActivity extends Activity{
 		String data = "https://bennynet.dyndns.org:8080/jsontest";
 		
 		
-		HttpRequest request = new HttpRequest(this);
+		HttpRequest request = new HttpRequest(this, getApplicationContext());
 		request.execute(data);
 		
 		Intent intent = new Intent(this, TimeTable.class);
