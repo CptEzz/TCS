@@ -2,7 +2,14 @@ package com.ezztech.tcs;
 
 import java.io.InputStream;
 import java.security.KeyStore;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -27,7 +34,7 @@ public class MyHttpClient extends DefaultHttpClient {
         registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         // Register for port 443 our SSLSocketFactory with our keystore
         // to the ConnectionManager
-        registry.register(new Scheme("https", newSslSocketFactory(), 8080/*TESTING HERE, DEFAULT is 443*/));
+        registry.register(new Scheme("https", newSslSocketFactory(), 8080));
         return new SingleClientConnManager(getParams(), registry);
     }
  
