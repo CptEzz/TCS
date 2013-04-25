@@ -27,6 +27,10 @@
             android:name="com.ezztech.tcs.TimeTable"
             android:label="@string/title_activity_time_table" >
         </activity>
+        <activity
+            android:name="com.ezztech.tcs.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

@@ -25,22 +25,42 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class HttpRequest extends AsyncTask<String, Integer, JSONObject> {
 	private JSONObject json;
-	private MainActivity activity;
+	private MainActivity mainActivity;
+	private Login loginActivity;
 	private Context context;
+	private String starter = null;
 	
 	protected void onPostExecute(JSONObject json){
 		//Log.v("TEST", "REQUEST FINISHED!");
-		activity.updateResults(json);
+		if (this.starter == "MainActivity"){
+			mainActivity.updateResults(json);
+		}else if(this.starter == "Login"){
+			try {
+				loginActivity.updateRequests(json);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public HttpRequest(MainActivity a, Context c){
-		this.activity = a;
+		this.mainActivity = a;
 		this.context = c;
+		this.starter = "MainActivity";
+	}
+	
+	public HttpRequest(Login a, Context c){
+		this.loginActivity = a;
+		this.context = c;
+		this.starter = "Login";
 	}
 	
 	@Override
