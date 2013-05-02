@@ -25,10 +25,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class HttpRequest extends AsyncTask<String, Integer, JSONObject> {
 	private JSONObject json;
@@ -40,7 +38,12 @@ public class HttpRequest extends AsyncTask<String, Integer, JSONObject> {
 	protected void onPostExecute(JSONObject json){
 		//Log.v("TEST", "REQUEST FINISHED!");
 		if (this.starter == "MainActivity"){
-			mainActivity.updateResults(json);
+			try {
+				mainActivity.updateResults(json);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else if(this.starter == "Login"){
 			try {
 				loginActivity.updateRequests(json);
@@ -67,8 +70,6 @@ public class HttpRequest extends AsyncTask<String, Integer, JSONObject> {
 	protected JSONObject doInBackground(String... datain) {
 		HttpResponse response = null;
 		InputStream in = null;
-		
-		String thing = datain[0];
 		
 		try{
 			HttpClient client = new MyHttpClient(context);
